@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cash App - Play & Earn</title>
+<meta name="theme-color" content="#00ff88">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#080808;color:#fff;padding-bottom:90px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#111;border-bottom:1px solid #222;position:sticky;top:0;z-index:20}
+.logo{font-weight:900;font-size:20px} .logo b{color:#00ff88}
+.pill{background:#1a1a1a;border:1px solid #333;padding:6px 12px;border-radius:20px;font-weight:700;font-size:12px}
+.pill.gold{background:#ffcc00;color:#000}
+.hero{margin:16px;border-radius:20px;background:linear-gradient(135deg,#111,#1a1a1a);border:1px solid #222;padding:18px}
+.big{font-size:36px;font-weight:900}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.game{background:#111;border:1px solid #222;border-radius:16px;padding:12px}
+.icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-weight:900;margin-bottom:8px;font-size:22px}
+.btn{width:100%;padding:10px;border-radius:10px;border:0;font-weight:800;background:#fff;color:#000;cursor:pointer}
+.btn.green{background:#00ff88}
+.section{padding:0 16px;margin-top:18px}
+.sec-head{color:#888;font-size:11px;letter-spacing:1px;font-weight:700;margin-bottom:10px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0;z-index:30}
+.nav button{background:transparent;border:0;color:#666;padding:6px 18px;border-radius:20px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.nav button.active{background:#fff;color:#000}
+.input{width:100%;background:#000;border:1px solid #333;color:#fff;padding:14px;border-radius:12px;margin-top:8px}
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#00ff88;color:#000;padding:10px 20px;border-radius:20px;font-weight:800;display:none;z-index:99}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;place-items:center;z-index:50;padding:20px}
+.modalBox{background:#111;border:1px solid #333;border-radius:20px;padding:20px;width:100%;max-width:380px}
+.offer{background:#151515;border:1px solid #222;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tapArea{width:100%;height:150px;background:#000;border:2px solid #00ff88;border-radius:16px;display:grid;place-items:center;font-size:42px;user-select:none}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.cardBtn{aspect-ratio:1;background:#222;border:1px solid #333;border-radius:10px;font-size:22px;display:grid;place-items:center;cursor:pointer}
+.cardBtn.matched{background:#00ff8822;border-color:#00ff88}
+.adSlot{background:#0f0f0f;border:1px solid #222;border-radius:14px;padding:10px;margin:12px 0;text-align:center;min-height:60px;display:grid;place-items:center}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+
+<div class="header">
+<div class="logo">🪙 <b>C</b>ash App</div>
+<div style="display:flex;gap:6px">
+<div class="pill">₹ <span id="rupees">0</span></div>
+<div class="pill gold"><span id="topCoins">0</span> 🪙</div>
+</div>
+</div>
+
+<div id="gamesPage">
+<div class="hero">
+<div style="font-size:10px;color:#00ff88">● LIVE</div>
+<h1 style="font-size:28px;margin:8px 0">Play Games,<br><span style="color:#00ff88">Earn Coins</span></h1>
+<div style="display:flex;justify-content:space-between;background:#000;border:1px solid #222;border-radius:14px;padding:14px;margin-top:12px">
+<div><div style="font-size:10px;color:#888">BALANCE</div><div class="big"><span id="bal">0</span> <span style="font-size:14px;color:#888">COINS</span></div></div>
+<div style="text-align:right"><div style="font-size:10px;color:#888">VALUE</div><div style="color:#ffcc00;font-weight:800;font-size:20px">₹<span id="val">0</span></div><div style="font-size:10px;color:#666">100 = ₹10</div></div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-head">GAMES</div>
+<div class="grid">
+<div class="game"><div class="icon" style="background:#fff;color:#000">👆</div><h3>Tap Fast</h3><p style="font-size:11px;color:#666;margin:4px 0 8px">20 taps = 10 coins</p><button class="btn green" onclick="openTap()">Play</button></div>
+<div class="game"><div class="icon" style="background:#8b5cf6">🧠</div><h3>Memory</h3><p style="font-size:11px;color:#666;margin:4px 0 8px">Match = 20 coins</p><button class="btn" onclick="openMem()">Play</button></div>
+<div class="game"><div class="icon" style="background:#22c55e">🧮</div><h3>Math Rush</h3><p style="font-size:11px;color:#666;margin:4px 0 8px">5 Q = 15 coins</p><button class="btn" onclick="openMath()">Play</button></div>
+<div class="game"><div class="icon" style="background:#f59e0b">🎡</div><h3>Spin</h3><p style="font-size:11px;color:#666;margin:4px 0 8px">Win up to 25</p><button class="btn" onclick="openSpin()">Spin</button></div>
+</div>
+
+<div class="adSlot" id="adSlot1">
+<!-- ADSENSE / ADMOB CODE PASTE HERE - AUTO ADS VASTAYI -->
+<button class="btn green" onclick="watchAd()">📺 Watch Ad & Earn 20 Coins</button>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-head">INSTALL & EARN</div>
+<div id="offers"></div>
+<div class="adSlot" id="adSlot2">
+<!-- SECOND AD SLOT -->
+</div>
+</div>
+</div>
+
+<div id="walletPage" style="display:none">
+<div class="section">
+<h1 style="font-size:28px">Wallet</h1>
+<div style="background:#fff;color:#000;border-radius:20px;padding:18px;margin-top:14px">
+<div style="font-size:11px;color:#888">TOTAL BALANCE</div>
+<div class="big" style="color:#000"><span id="wBal">0</span> COINS</div>
+<div style="font-size:20px;font-weight:800">₹<span id="wRupee">0</span></div>
+</div>
+</div>
+</div>
+
+<div id="withdrawPage" style="display:none">
+<div class="section">
+<h1 style="font-size:28px">Withdraw</h1>
+<div style="background:#111;border:1px solid #222;border-radius:20px;padding:16px;margin-top:14px">
+<div style="font-size:11px;color:#888">UPI ID</div>
+<input id="upi" class="input" placeholder="yourname@okhdfcbank">
+<div style="font-size:11px;color:#888;margin-top:12px">AMOUNT (Min ₹50)</div>
+<input id="amt" class="input" type="number" value="50" min="50">
+<div style="background:#000;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-top:12px;font-size:13px"><div><span id="deduct">500 coins</span></div><div><span id="after">0 coins left</span></div></div>
+<button class="btn green" style="padding:14px;margin-top:12px" onclick="doWithdraw()">Withdraw</button>
+<div id="wMsg" style="margin-top:10px;font-size:12px;color:#00ff88"></div>
+<div id="wList" style="margin-top:12px"></div>
+</div>
+</div>
+</div>
+
+<div class="nav">
+<button id="n1" class="active" onclick="showPage('games')">🎮<span>Games</span></button>
+<button id="n2" onclick="showPage('wallet')">👛<span>Wallet</span></button>
+<button id="n3" onclick="showPage('withdraw')">₹<span>Withdraw</span></button>
+</div>
+
+<div id="tapModal" class="modal"><div class="modalBox"><h3>Tap Fast</h3><div id="tapCount" style="font-size:44px;text-align:center;margin:12px 0">0</div><div class="tapArea" id="tapArea" ontouchstart="doTap(event)" onclick="doTap(event)">TAP! 👆</div><div style="display:flex;gap:10px;margin-top:12px"><button class="btn" onclick="closeAll()">Close</button><button class="btn green" id="tapStart" onclick="startTap()">Start (5s)</button></div></div></div>
+<div id="memModal" class="modal"><div class="modalBox"><h3>Memory Flip</h3><div class="cards" id="cards"></div><div style="display:flex;gap:10px;margin-top:12px"><button class="btn" onclick="closeAll()">Close</button><button class="btn green" onclick="initMem()">Restart</button></div></div></div>
+<div id="mathModal" class="modal"><div class="modalBox"><h3>Math Rush</h3><div id="mathQ" style="font-size:22px;text-align:center;margin:16px 0"></div><input id="mathAns" class="input" type="number" placeholder="Answer"><div style="display:flex;gap:10px;margin-top:12px"><button class="btn" onclick="closeAll()">Close</button><button class="btn green" onclick="checkMath()">Submit</button></div><div id="mathProg" style="text-align:center;margin-top:8px;font-size:12px;color:#888"></div></div></div>
+<div id="spinModal" class="modal"><div class="modalBox"><h3>Lucky Spin</h3><div id="spinRes" style="font-size:60px;text-align:center;margin:20px 0">🎡</div><button class="btn green" onclick="doSpin()">SPIN</button><button class="btn" style="margin-top:8px" onclick="closeAll()">Close</button></div></div>
+
+<script>
+let coins = parseInt(localStorage.getItem('coins_clean')||'0');
+let lastSpin = parseInt(localStorage.getItem('lastSpinClean')||'0');
+let lastGame = parseInt(localStorage.getItem('lastGameClean')||'0');
+function save(){localStorage.setItem('coins_clean',coins);update();}
+function update(){
+ document.querySelectorAll('#bal,#wBal,#topCoins').forEach(e=>e.innerText=coins);
+ document.getElementById('rupees').innerText=Math.floor(coins/10);
+ document.getElementById('val').innerText=Math.floor(coins/10);
+ document.getElementById('wRupee').innerText=(coins/10).toFixed(2);
+ let amt=parseInt(document.getElementById('amt').value||50);
+ document.getElementById('deduct').innerText=(amt*10)+' coins';
+ document.getElementById('after').innerText=Math.max(0,coins-amt*10)+' coins left';
+}
+function toast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200);}
+function add(c){
+ let now=Date.now();
+ if(now-lastGame<4000 && c>0){toast('Wait!');return;}
+ lastGame=now; localStorage.setItem('lastGameClean',now);
+ coins+=c;save();toast('+'+c+' coins'); if(navigator.vibrate) navigator.vibrate(60);
+}
+function showPage(p){
+ document.getElementById('gamesPage').style.display=p==='games'?'block':'none';
+ document.getElementById('walletPage').style.display=p==='wallet'?'block':'none';
+ document.getElementById('withdrawPage').style.display=p==='withdraw'?'block':'none';
+ document.getElementById('n1').className=p==='games'?'active':'';document.getElementById('n2').className=p==='wallet'?'active':'';document.getElementById('n3').className=p==='withdraw'?'active':'';
+}
+function closeAll(){document.querySelectorAll('.modal').forEach(m=>m.style.display='none');}
+
+let offersData=[
+ {name:'Roz Dhan',pay:50,desc:'Install & Earn',link:'https://'},
+ {name:'MPL Ludo',pay:40,desc:'Play & Earn',link:'https://'},
+ {name:'Upstox',pay:100,desc:'Demat Open',link:'https://'},
+ {name:'PhonePe',pay:30,desc:'UPI Earn',link:'https://'},
+];
+function renderOffers(){
+ document.getElementById('offers').innerHTML=offersData.map(o=>`<div class="offer"><div><b>${o.name}</b><br><small style="color:#888">${o.desc}</small><br><small style="color:#00ff88">+${o.pay} coins</small></div><div><button class="btn green" style="width:auto;padding:8px 14px" onclick="completeOffer(${o.pay},'${o.link}')">Start</button></div></div>`).join('');
+}
+function completeOffer(pay,link){window.open(link,'_blank');setTimeout(()=>{if(confirm('Installed? Get '+pay+' coins')) add(pay);},1000);}
+
+let tapC=0,tapTimer=null,tapActive=false;
+function openTap(){document.getElementById('tapModal').style.display='grid';resetTap();}
+function resetTap(){tapC=0;tapActive=false;document.getElementById('tapCount').innerText='0';document.getElementById('tapStart').innerText='Start (5s)';document.getElementById('tapStart').disabled=false;}
+function startTap(){resetTap();tapActive=true;document.getElementById('tapStart').disabled=true;document.getElementById('tapStart').innerText='Running...';tapTimer=setTimeout(()=>{tapActive=false;if(tapC>=20){add(10);}else toast('Only '+tapC+' taps! Need 20');document.getElementById('tapStart').disabled=false;document.getElementById('tapStart').innerText='Again';},5000);}
+function doTap(e){e.preventDefault();if(!tapActive) return;tapC++;document.getElementById('tapCount').innerText=tapC;}
+
+let memCards=[],memOpen=[],memMatched=0;
+function openMem(){document.getElementById('memModal').style.display='grid';initMem();}
+function initMem(){let icons=['🍎','🍎','🍌','🍌','🍇','🍇','🍓','🍓'];icons.sort(()=>Math.random()-.5);memCards=icons;memOpen=[];memMatched=0;document.getElementById('cards').innerHTML=icons.map((ic,i)=>`<div class="cardBtn" id="c${i}" onclick="flipCard(${i})">❓</div>`).join('');}
+function flipCard(i){let el=document.getElementById('c'+i);if(el.classList.contains('matched')||memOpen.includes(i)||memOpen.length>=2) return;el.innerText=memCards[i];memOpen.push(i);if(memOpen.length==2){let [a,b]=memOpen;if(memCards[a]==memCards[b]){setTimeout(()=>{document.getElementById('c'+a).classList.add('matched');document.getElementById('c'+b).classList.add('matched');memMatched+=2;memOpen=[];if(memMatched==8){add(20);toast('20 coins!');closeAll();}},350);}else{setTimeout(()=>{document.getElementById('c'+a).innerText='❓';document.getElementById('c'+b).innerText='❓';memOpen=[];},600);}}}
+
+let mathQs=[],mathIdx=0,mathScore=0;
+function openMath(){document.getElementById('mathModal').style.display='grid';initMath();}
+function initMath(){mathQs=[];for(let i=0;i<5;i++){let x=Math.floor(Math.random()*50)+1,y=Math.floor(Math.random()*20)+1;mathQs.push({q:`${x} + ${y} = ?`,a:x+y});}mathIdx=0;mathScore=0;showMathQ();}
+function showMathQ(){if(mathIdx>=5){if(mathScore>=4) add(15);toast('Score '+mathScore+'/5');closeAll();return;}document.getElementById('mathQ').innerText=mathQs[mathIdx].q;document.getElementById('mathProg').innerText=(mathIdx+1)+'/5 | Score '+mathScore;document.getElementById('mathAns').value='';}
+function checkMath(){let ans=parseInt(document.getElementById('mathAns').value);if(ans==mathQs[mathIdx].a) mathScore++;mathIdx++;showMathQ();}
+
+function openSpin(){document.getElementById('spinModal').style.display='grid';}
+function doSpin(){let now=Date.now();if(now-lastSpin<30*60*1000){let left=Math.ceil((30*60*1000-(now-lastSpin))/60000);toast('Wait '+left+' min');return;}let rewards=[5,10,15,20,25];let w=rewards[Math.floor(Math.random()*rewards.length)];document.getElementById('spinRes').innerText='+'+w+' 🪙';lastSpin=now;localStorage.setItem('lastSpinClean',now);add(w);setTimeout(closeAll,1200);}
+
+function watchAd(){toast('Loading Ad...');setTimeout(()=>{add(20);},2500);}
+
+function doWithdraw(){
+ let upi=document.getElementById('upi').value.trim(); let amt=parseInt(document.getElementById('amt').value);
+ if(!upi.includes('@')){alert('Enter valid UPI');return;}
+ if(amt<50){alert('Min ₹50');return;}
+ if(coins<amt*10){alert('Not enough coins');return;}
+ if(localStorage.getItem('lastWD') && Date.now()-parseInt(localStorage.getItem('lastWD'))<86400000){alert('1 withdraw per day');return;}
+ coins-=amt*10;save();
+ let list=JSON.parse(localStorage.getItem('wlistClean')||'[]');
+ list.unshift({upi,amt,date:new Date().toLocaleString(),status:'Pending'}); localStorage.setItem('wlistClean',JSON.stringify(list));
+ localStorage.setItem('lastWD',Date.now());
+ // WhatsApp to you - REPLACE NUMBER
+ let yourNumber='91XXXXXXXXXX';
+ let msg=`NEW WITHDRAW ₹${amt} to ${upi}`;
+ let waLink=`https://wa.me/${yourNumber}?text=${encodeURIComponent(msg)}`;
+ document.getElementById('wMsg').innerHTML=`✅ Requested! <a href="${waLink}" target="_blank" style="color:#00ff88">Send WhatsApp to Admin</a>`;
+ renderWList();
+}
+function renderWList(){let list=JSON.parse(localStorage.getItem('wlistClean')||'[]');document.getElementById('wList').innerHTML=list.map(x=>`<div style="border-top:1px solid #222;padding:8px 0;font-size:12px">₹${x.amt} → ${x.upi}<br><small style="color:#888">${x.date} - ${x.status}</small></div>`).join('');}
+
+document.getElementById('amt').addEventListener('input',update);
+update();renderOffers();renderWList();
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.hr
