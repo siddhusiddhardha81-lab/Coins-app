@@ -212,7 +212,7 @@ function doWithdraw(){
  list.unshift({upi,amt,date:new Date().toLocaleString(),status:'Pending'}); localStorage.setItem('wlistClean',JSON.stringify(list));
  localStorage.setItem('lastWD',Date.now());
  // WhatsApp to you - REPLACE NUMBER
- let yourNumber='91XXXXXXXXXX';
+ let yourNumber='917680914460';
  let msg=`NEW WITHDRAW ₹${amt} to ${upi}`;
  let waLink=`https://wa.me/${yourNumber}?text=${encodeURIComponent(msg)}`;
  document.getElementById('wMsg').innerHTML=`✅ Requested! <a href="${waLink}" target="_blank" style="color:#00ff88">Send WhatsApp to Admin</a>`;
