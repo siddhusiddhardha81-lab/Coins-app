@@ -1,0 +1,16 @@
+{
+  "name": "Cash App - Earn Real Cash",
+  "short_name": "Cash App",
+  "description": "Play games, earn coins, withdraw real cash via UPI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#00ff88",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/138/138292.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
