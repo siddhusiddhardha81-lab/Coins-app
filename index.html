@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cash Coins - OfferWall</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#0a0e13;color:#fff}
+#loginPage{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:24px}
+.card{width:100%;max-width:380px;background:#151b24;border-radius:20px;padding:24px;border:1px solid #1f2937;text-align:center}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #2d3748;background:#0f141c;color:#fff;margin-bottom:12px}
+button{width:100%;padding:13px;border-radius:12px;border:0;background:#f59e0b;color:#000;font-weight:800;cursor:pointer}
+#mainApp{display:none}.header{display:flex;justify-content:space-between;padding:12px 16px;background:#151b24;border-bottom:1px solid #1f2937;position:sticky;top:0;z-index:10}
+.badge{background:#1f2937;padding:7px 12px;border-radius:20px;font-weight:700}
+.nav{display:flex;gap:8px;padding:10px 16px;background:#0a0e13;position:sticky;top:54px;z-index:9}
+.nav button{flex:1;padding:10px;background:#1f2937;color:#fff;border-radius:10px}
+.nav button.active{background:#f59e0b;color:#000}
+.apps{padding:12px 16px 80px}.app{background:#151b24;border-radius:14px;padding:12px;border:1px solid #1f2937;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.app b{font-size:13px}.app span{font-size:11px;color:#9ca3af;display:block;margin-top:2px}
+.app a{width:auto;min-width:78px;padding:9px 16px;background:#10b981;color:#fff;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;text-align:center;display:inline-block}
+.wallet-box{background:#151b24;margin:16px;padding:18px;border-radius:16px;text-align:center;border:1px solid #1f2937}
+.hidden{display:none!important}
+.code-box{background:#0f141c;border:1px solid #2d3748;border-radius:8px;padding:10px;margin:10px 0;font-family:monospace;font-size:11px;word-break:break-all;text-align:left}
+</style>
+</head>
+<body>
+<div id="loginPage"><div class="card"><h2>💰 Cash Coins</h2><p style="color:#9ca3af;font-size:12px;margin:8px 0 16px">20 Apps - OfferWall - Auto Coins</p><input id="phoneInput" type="tel" placeholder="Enter Your Phone"><button id="loginBtn">Start Earning</button>
+<div class="code-box">OfferWall Link:<br>https://www.cpagrip.com/common/offerwall.php?user=3367818&subid=PHONE_BASE64<br><br>Idi 20 apps ki same link - subid auto maruthundi!</div>
+</div></div>
+
+<div id="mainApp">
+<div class="header"><h3>Cash Coins</h3><div style="display:flex;gap:8px"><div class="badge">🪙 <span id="coinCount">0</span></div><button id="adminBtn" class="hidden" style="width:32px;height:32px;border-radius:50%;background:#1f2937;color:#fff;border:0">⚙️</button></div></div>
+<div class="nav"><button id="tabHome" class="active">Home</button><button id="tabWallet">Wallet</button><button id="tabProfile">Profile</button></div>
+
+<div id="homeView"><div class="apps" id="appsContainer"></div><p style="text-align:center;color:#10b981;font-size:12px;margin-top:10px;font-weight:700">✅ ONE LINK FOR ALL 20 APPS - Auto Coins via Postback</p></div>
+
+<div id="walletView" style="display:none"><div class="wallet-box">
+<h2><span id="walletCoins">0</span> Coins = ₹<span id="walletRs">0</span></h2>
+<div style="background:#0f141c;border-radius:12px;padding:14px;margin-top:14px;border:2px solid #10b981;text-align:left">
+<input id="upiInput" placeholder="Your UPI ID"><input id="amountInput" type="number" placeholder="Coins Min 500"><button id="withdrawBtn">SEND REQUEST</button>
+</div></div></div>
+
+<div id="profileView" style="display:none;padding:16px"><div style="background:#151b24;padding:16px;border-radius:16px;text-align:center"><h3>Your Earnings</h3><h1 style="margin:12px 0">🪙 <span id="profileCoins">0</span></h1><p style="color:#9ca3af;font-size:12px">User ID: <b id="userIdDisplay" style="color:#f59e0b">-</b></p><button id="logoutBtn" style="margin-top:16px;background:#1f2937;color:#fff">Logout</button></div></div>
+</div>
+
+<div id="adminPanel" style="display:none;padding:16px;background:#0f141c;min-height:100vh"><h3>Admin - Withdraw Requests</h3><div style="display:flex;gap:8px;margin:12px 0"><button id="viewWithdrawsBtn" style="background:#25D366;color:#fff;width:auto;padding:8px 14px">Load Requests</button><button id="closeAdminBtn" style="background:#1f2937;color:#fff;width:auto;padding:8px 14px">Close</button></div><div id="withdrawList"></div></div>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyDQhT935Q6zTtm7yaFqqH1TDj5f2gnOKpY",authDomain:"coins-app-482a9.firebaseapp.com",projectId:"coins-app-482a9",storageBucket:"coins-app-482a9.firebasestorage.app",messagingSenderId:"201849783716",appId:"1:201849783716:web:f3fd734cd0c7a196fdad31"};
+firebase.initializeApp(firebaseConfig); const db=firebase.firestore();
+const ADMIN_PHONE="7680914460"; const ADMIN_WA="917680914460";
+let currentPhone=null, userData=null;
+function b64(s){try{return btoa(s).replace(/=+$/,'')}catch(e){return s}}
+
+// ✅ EKKADE PETTALI - ONE LINK FOR ALL 20 APPS - IDI AKKADA PETTALI CHUDU:
+const OFFERWALL_BASE = "https://www.cpagrip.com/common/offerwall.php?user=3367818";
+// Ikkada 3367818 nee user ID - idhi maarchaku!
+
+let appsList=[
+ {title:"PhonePe - UPI Payment", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Paytm - UPI & Recharge", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Google Pay", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"CRED - Pay Bills", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Meesho Shopping", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Flipkart Shopping", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Amazon Shopping", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Swiggy Food", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Zomato Food", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Dream11 Fantasy", coins:30, desc:"Install & Register - 30 Coins"},
+ {title:"Groww Stocks", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Upstox Stocks", coins:30, desc:"Install & Open - 30 Coins"},
+ {title:"Moj Short Video", coins:30, desc:"Install & Watch - 30 Coins"},
+ {title:"MX TakaTak", coins:30, desc:"Install & Watch - 30 Coins"},
+ {title:"Ludo King", coins:30, desc:"Install & Play - 30 Coins"},
+ {title:"WinZO Games", coins:30, desc:"Install & Play - 30 Coins"},
+ {title:"Zupee Ludo", coins:30, desc:"Install & Play - 30 Coins"},
+ {title:"MPL Games", coins:30, desc:"Install & Play - 30 Coins"},
+ {title:"RummyCircle", coins:30, desc:"Install & Register - 30 Coins"},
+ {title:"A23 Rummy", coins:30, desc:"Install & Play - 30 Coins"}
+];
+
+function renderApps(){
+ const c=document.getElementById('appsContainer'); c.innerHTML='';
+ const subid = b64(currentPhone||"test");
+ // ONE LINK FOR ALL 20 APPS - subid phone tho auto maruthundi
+ const offerwallLink = `${OFFERWALL_BASE}&subid=${subid}`;
+ 
+ appsList.forEach((a,i)=>{
+  const d=document.createElement('div'); d.className='app';
+  // ✅ IDI AKKADA PETTALI - 20 apps ki same OfferWall link - subid auto change
+  d.innerHTML=`<div style="flex:1;text-align:left"><b>${i+1}. ${a.title}</b><span>${a.desc} | One Link Tracking</span></div><a href="${offerwallLink}" target="_blank" rel="noopener">Get ${a.coins}</a>`;
+  c.appendChild(d);
+ });
+}
+
+async function login(phone){
+ currentPhone=phone.replace(/\D/g,'').slice(-10);
+ localStorage.setItem('cashPhone',currentPhone);
+ document.getElementById('loginPage').style.display='none';
+ document.getElementById('mainApp').style.display='block';
+ const adminBtn=document.getElementById('adminBtn');
+ if(currentPhone===ADMIN_PHONE){adminBtn.classList.remove('hidden');} else {adminBtn.classList.add('hidden');}
+ try{
+  const doc=await db.collection('users').doc(currentPhone).get();
+  if(doc.exists){userData=doc.data();}
+  else {
+   userData={coins:0,phone:currentPhone,referId:b64(currentPhone),createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+   await db.collection('users').doc(currentPhone).set(userData);
+   userData.coins=0;
+  }
+ }catch(e){userData={coins:0,phone:currentPhone,referId:b64(currentPhone)};}
+ updateUI(); renderApps();
+ db.collection('users').doc(currentPhone).onSnapshot(snap=>{if(snap.exists){userData=snap.data(); updateUI();}});
+}
+function updateUI(){
+ const coins=userData?.coins||0;
+ document.getElementById('coinCount').textContent=coins;
+ document.getElementById('walletCoins').textContent=coins;
+ document.getElementById('walletRs').textContent=(coins*0.1).toFixed(2);
+ document.getElementById('profileCoins').textContent=coins;
+ document.getElementById('userIdDisplay').textContent=userData?.referId||b64(currentPhone);
+}
+window.onload=()=>{
+ renderApps();
+ const saved=localStorage.getItem('cashPhone');
+ if(saved) login(saved);
+};
+document.getElementById('loginBtn').onclick=()=>{const p=document.getElementById('phoneInput').value.trim(); if(p.length<10){alert('Enter valid phone');return;} login(p);};
+document.getElementById('logoutBtn').onclick=()=>{localStorage.removeItem('cashPhone'); location.reload();};
+document.getElementById('tabHome').onclick=()=>{document.getElementById('homeView').style.display='block';document.getElementById('walletView').style.display='none';document.getElementById('profileView').style.display='none';tabActive('tabHome');};
+document.getElementById('tabWallet').onclick=()=>{document.getElementById('homeView').style.display='none';document.getElementById('walletView').style.display='block';document.getElementById('profileView').style.display='none';tabActive('tabWallet');};
+document.getElementById('tabProfile').onclick=()=>{document.getElementById('homeView').style.display='none';document.getElementById('walletView').style.display='none';document.getElementById('profileView').style.display='block';tabActive('tabProfile');};
+function tabActive(id){['tabHome','tabWallet','tabProfile'].forEach(t=>document.getElementById(t).classList.remove('active'));document.getElementById(id).classList.add('active');}
+document.getElementById('adminBtn').onclick=()=>{document.getElementById('adminPanel').style.display='block';document.getElementById('mainApp').style.display='none';};
+document.getElementById('closeAdminBtn').onclick=()=>{document.getElementById('adminPanel').style.display='none';document.getElementById('mainApp').style.display='block';};
+document.getElementById('withdrawBtn').onclick=async()=>{
+ const upi=document.getElementById('upiInput').value.trim(); const amt=parseInt(document.getElementById('amountInput').value.trim());
+ if(!upi||!amt){alert('Enter UPI & Amount');return;} if(amt<500){alert('Min 500');return;} if(amt>(userData.coins||0)){alert('Not enough');return;}
+ const msg=`*WITHDRAW*%0A🆔 ${userData.referId}%0A📱 ${currentPhone}%0A💰 ${userData.coins}%0A💸 ${amt}%0A🏦 ${upi}`;
+ try{await db.collection('withdraws').add({phone:currentPhone,userId:userData.referId,walletCoins:userData.coins,upi,amount:amt,status:'pending',createdAt:firebase.firestore.FieldValue.serverTimestamp()});}catch(e){}
+ window.open(`https://wa.me/${ADMIN_WA}?text=${msg}`,'_blank');
+};
+document.getElementById('viewWithdrawsBtn').onclick=async()=>{
+ const l=document.getElementById('withdrawList'); l.innerHTML='Loading...';
+ try{const s=await db.collection('withdraws').orderBy('createdAt','desc').limit(30).get(); l.innerHTML=''; s.forEach(d=>{const v=d.data(); const div=document.createElement('div'); div.style.cssText='background:#151b24;padding:12px;border-radius:8px;margin-bottom:8px;border-left:3px solid #10b981'; div.innerHTML=`🆔 ${v.userId}<br>📱 ${v.phone}<br>💰 ${v.walletCoins} | 💸 ${v.amount}<br>🏦 ${v.upi}`; l.appendChild(div);});}catch(e){l.innerHTML='Error';}
+};
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+  </html>
+  
