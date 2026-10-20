@@ -4,6 +4,13 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   try {
     const { subid, sub_id, payout } = req.query;
+        // If subid is full URL like https://.../?ref=XYZ, extract ref
+    if (userSubId.includes('?ref=')) {
+      userSubId = userSubId.split('?ref=')[1].split('&')[0];
+    }
+    if (userSubId.includes('ref=')) {
+      userSubId = userSubId.split('ref=')[1];
+    }
     const userSubId = subid || sub_id || 'unknown';
     let phone = null;
     try {
