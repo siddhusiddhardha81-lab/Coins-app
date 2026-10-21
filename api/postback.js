@@ -46,6 +46,6 @@ export default async function handler(req,res){
   }catch(e){
     console.error(e);
     // Fallback - still return OK to CPAlead so they don't retry forever
-    return res.status(200).send('OK - Logged'https://seven.vercel.app/api/postback?subid={subid}&payout={payout}&transaction_id={transaction_id}&status={status});
+    return res.status(200).send('OK - Logged');
   }
 }
