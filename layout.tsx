@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+<meta name="mylead-verification" content="b1cc463159fd900403d5d969917c5eb4">import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Coins App",
