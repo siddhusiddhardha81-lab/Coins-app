@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta name="mylead-verification" content="b1cc463159fd900403d5d969917c5eb4">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cash Coins - Final Working</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#0a0e13;color:#fff}
+#login{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.card{width:100%;max-width:360px;background:#151b24;border-radius:20px;padding:24px;border:1px solid #1f2937;text-align:center}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #2d3748;background:#0f141c;color:#fff;margin-bottom:12px}
+button{width:100%;padding:13px;border-radius:12px;border:0;background:#f59e0b;color:#000;font-weight:800;cursor:pointer}
+#app{display:none}
+.head{display:flex;justify-content:space-between;padding:16px;background:#151b24;position:sticky;top:0;z-index:9}
+.nav{display:flex;gap:8px;padding:12px 16px;position:sticky;top:56px;background:#0a0e13;z-index:9}
+.nav button{flex:1;padding:10px;background:#1f2937;color:#fff;border-radius:10px;font-size:12px;border:0}
+.nav button.active{background:#f59e0b;color:#000}
+.list{padding:10px 16px 90px}
+.item{width:100%;padding:14px;border:1px solid #1f2937;display:flex;gap:12px;background:#151b24;border-radius:14px;margin-bottom:12px;align-items:center;cursor:pointer}
+.item-icon{width:48px;height:48px;background:#1f2937;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.item b{font-size:13px;display:block}.item span{font-size:11px;color:#9ca3af}
+.item button{width:auto;min-width:75px;padding:10px 14px;background:#10b981;color:#fff;border-radius:10px;font-size:12px;font-weight:800;margin-left:auto;flex-shrink:0;border:0}
+.walletBox{background:#151b24;margin:16px;padding:20px;border-radius:16px;text-align:center;border:1px solid #1f2937}
+</style>
+</head>
+<body>
+<div style="display:none">b1cc463159fd900403d5d969917c5eb4</div>
+
+<div id="login"><div class="card"><h2>💰 Cash Coins</h2><p style="color:#10b981;font-size:12px;margin:8px 0 16px">MyLead Verified - 50 Coins Per App</p>
+<input id="phone" placeholder="Enter 10 digit mobile number" type="number">
+<button id="loginBtn">Login & Earn - Direct Open</button>
+<p style="font-size:10px;color:#6b7280;margin-top:12px">Click GET 50 - Direct MyLead OfferWall Opens - 100% Working</p>
+</div></div>
+
+<div id="app">
+<div class="head"><h3>💰 Cash Coins</h3><div style="display:flex;gap:8px"><div style="background:#1f2937;padding:6px 12px;border-radius:20px;font-size:12px">🪙 <span id="c">0</span></div><div style="background:#1f2937;padding:6px 12px;border-radius:20px;font-size:12px">₹ <span id="rs">0</span></div></div></div>
+<div class="nav"><button id="home" class="active">Home</button><button id="walletBtn">Wallet</button><button id="withdrawBtn">Withdraw</button></div>
+
+<div id="homeV"><div id="offerList" class="list"></div></div>
+<div id="walletV" style="display:none"><div class="walletBox"><h2><span id="c2">0</span> Coins</h2><p style="font-size:22px;margin-top:8px">= ₹<span id="rs2">0</span></p><p style="color:#10b981;margin-top:10px">500 Coins = ₹50</p><p style="font-size:11px;color:#6b7280;margin-top:6px">10 Coins = ₹1 - 50 Coins = ₹5 per app</p></div></div>
+<div id="wHomeV" style="display:none;padding:16px"><div style="background:#151b24;padding:16px;border-radius:16px">
+<h3>Withdraw - 500 Coins = ₹50</h3>
+<p style="font-size:11px;color:#9ca3af;margin:8px 0">Min 500 Coins - Direct WhatsApp to Admin</p>
+<input id="upi" placeholder="Enter UPI ID - example@upi">
+<input id="amt" placeholder="500 Coins = ₹50" type="number">
+<button id="wdBtn">Withdraw Now - Direct WhatsApp</button>
+<p style="font-size:10px;color:#6b7280;margin-top:10px">Your number not displayed - Only backend</p>
+</div></div>
+</div>
+
+<script>
+const WA="917680914460";
+const OFFERWALL_LINK="https://hub.mylead.global/offerwall/0ffeda29-d03e-11f1-a679-129a1c289511";
+const offers=[
+{id:"offerwall",title:"🔥 MyLead OfferWall - 100+ Apps",desc:"MyLead - 100+ India + USA apps - BHIM, Vivago, Games - Best payout",coins:50,icon:"🧱",link:OFFERWALL_LINK},
+{id:"bhim",title:"BHIM UPI - MyLead",desc:"BHIM UPI Official - 50 Coins = ₹5 - Direct Open",coins:50,icon:"💳",link:OFFERWALL_LINK},
+{id:"vivago",title:"Vivago AI - Art",desc:"Vivago.AI - 50 Coins - Direct Open - India",coins:50,icon:"🎨",link:OFFERWALL_LINK},
+{id:"games",title:"Games Zone",desc:"Gaming Apps - 50 Coins = ₹5 - Direct",coins:50,icon:"🎮",link:OFFERWALL_LINK},
+{id:"finance",title:"Finance Apps",desc:"Finance & UPI Apps - 50 Coins Direct",coins:50,icon:"🏦",link:OFFERWALL_LINK}
+];
+let phone=null;
+let coins=0;
+
+function render(){
+const c=document.getElementById('offerList'); c.innerHTML='';
+offers.forEach(o=>{
+const d=document.createElement('div'); d.className='item';
+d.innerHTML=`<div class="item-icon">${o.icon}</div><div style="flex:1;min-width:0"><b>${o.title}</b><br><span>${o.desc}</span><br><span style="color:#10b981;font-weight:bold">🪙 ${o.coins} Coins = ₹5</span></div><button>GET 50</button>`;
+const btn=d.querySelector('button');
+btn.onclick=(e)=>{
+e.stopPropagation();
+window.open(o.link,'_blank');
+coins+=5;
+updateCoins();
+};
+d.onclick=()=>{
+window.open(o.link,'_blank');
+coins+=5;
+updateCoins();
+};
+c.appendChild(d);
+});
+}
+
+function updateCoins(){
+document.getElementById('c').textContent=coins;
+document.getElementById('c2').textContent=coins;
+document.getElementById('rs').textContent=(coins/10).toFixed(0);
+document.getElementById('rs2').textContent=(coins/10).toFixed(0);
+localStorage.setItem('coins',coins.toString());
+}
+
+function login(p){
+phone=p.replace(/\D/g,'').slice(-10);
+localStorage.setItem('ph',phone);
+document.getElementById('login').style.display='none';
+document.getElementById('app').style.display='block';
+coins=parseInt(localStorage.getItem('coins')||'0');
+updateCoins();
+render();
+}
+
+document.getElementById('loginBtn').onclick=()=>{
+const v=(document.getElementById('phone') as HTMLInputElement).value.trim();
+if(v.length<10){alert('Enter 10 digit');return;}
+login(v);
+};
+
+document.getElementById('home').onclick=()=>{
+document.getElementById('homeV').style.display='block';
+document.getElementById('walletV').style.display='none';
+document.getElementById('wHomeV').style.display='none';
+document.getElementById('home').className='active';
+document.getElementById('walletBtn').className='';
+document.getElementById('withdrawBtn').className='';
+};
+document.getElementById('walletBtn').onclick=()=>{
+document.getElementById('homeV').style.display='none';
+document.getElementById('walletV').style.display='block';
+document.getElementById('wHomeV').style.display='none';
+document.getElementById('home').className='';
+document.getElementById('walletBtn').className='active';
+document.getElementById('withdrawBtn').className='';
+};
+document.getElementById('withdrawBtn').onclick=()=>{
+document.getElementById('homeV').style.display='none';
+document.getElementById('walletV').style.display='none';
+document.getElementById('wHomeV').style.display='block';
+document.getElementById('home').className='';
+document.getElementById('walletBtn').className='';
+document.getElementById('withdrawBtn').className='active';
+};
+
+document.getElementById('wdBtn').onclick=()=>{
+const upi=(document.getElementById('upi') as HTMLInputElement).value.trim();
+const amt=parseInt((document.getElementById('amt') as HTMLInputElement).value.trim());
+if(!upi||!amt){alert('Enter UPI & Coins');return;}
+if(amt<500){alert('Min 500 Coins = ₹50');return;}
+if(amt>coins){alert('Not enough coins - You have '+coins);return;}
+const walletTotal=coins;
+const withdrawRupees=amt/10;
+const walletRupees=walletTotal/10;
+const remaining=walletTotal-amt;
+const msg=`*NEW WITHDRAWAL* 💰
+📱 Phone: ${phone}
+💳 UPI: ${upi}
+🪙 WITHDRAW: ${amt} Coins = ₹${withdrawRupees}
+👛 WALLET TOTAL: ${walletTotal} Coins = ₹${walletRupees}
+📉 REMAINING: ${remaining} Coins
+✅ Send ₹${withdrawRupees} to ${upi}`;
+window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+alert(`${amt} Coins = ₹${withdrawRupees} - Wallet Total ${walletTotal} Coins - Request Sent`);
+};
+
+window.onload=()=>{
+const saved=localStorage.getItem('ph');
+if(saved){
+phone=saved;
+document.getElementById('login').style.display='none';
+document.getElementById('app').style.display='block';
+coins=parseInt(localStorage.getItem('coins')||'0');
+updateCoins();
+render();
+}
+};
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
