@@ -1,4 +1,4 @@
-<meta name="mylead-verification" content="b1cc463159fd900403d5d969917c5eb4">import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Coins App",
@@ -13,6 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="mylead-verification" content="b1cc463159fd900403d5d969917c5eb4" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5062837450367714"
