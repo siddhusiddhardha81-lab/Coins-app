@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cash Coins</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0f1115;color:#fff}
+.login{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.card{width:100%;max-width:360px;background:#1a1d24;border-radius:20px;padding:24px;text-align:center;border:1px solid #23262f}
+.input{width:100%;padding:14px;border-radius:12px;border:1px solid #2d3748;background:#0f1115;color:#fff;margin-bottom:12px}
+.btn{width:100%;padding:14px;border-radius:12px;border:0;background:#f59e0b;color:#000;font-weight:800;cursor:pointer}
+.head{display:flex;justify-content:space-between;padding:16px 16px;background:#1a1d24;border-bottom:1px solid #23262f}
+.nav{display:flex;gap:8px;padding:12px 16px;background:#0f1115;position:sticky;top:56px;z-index:9}
+.nav button{flex:1;padding:10px;background:#1a1d24;color:#8b8da0;border:1px solid #23262f;border-radius:10px;font-size:12px;cursor:pointer}
+.nav button.active{background:#f59e0b;color:#000;border:0;font-weight:700}
+.list{padding:12px 16px 90px}
+.ad-item{width:100%;padding:16px;border:1px solid #23262f;display:flex;gap:12px;background:#1a1d24;border-radius:14px;margin-bottom:12px;align-items:center}
+.ad-icon{width:48px;height:48px;background:#23262f;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.wallet{margin:16px;padding:20px;border-radius:16px;text-align:center;background:#1a1d24;border:1px solid #23262f}
+</style>
+<!-- Monetag In-Page Push ONLY - Zone 12126793 Lovely tag - Inside website - First two deleted -->
+<script>(function(s){s.dataset.zone='12126793',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</head>
+<body>
+
+<div id="login" class="login">
+<div class="card">
+<h2>Cash Coins</h2>
+<p style="font-size:12px;color:#666;margin:8px 0 20px">Shorts • Inside Ads Only • No Popups</p>
+<input id="phone" class="input" placeholder="Mobile - 10 digits" type="tel">
+<button class="btn" onclick="doLogin()">Login</button>
+<p style="font-size:10px;color:#444;margin-top:12px">ID = Mobile Number</p>
+</div>
+</div>
+
+<div id="app" style="display:none">
+<div class="head">
+<div style="display:flex;gap:8px;align-items:center"><b>Cash Coins</b><div style="background:#23262f;padding:6px 12px;border-radius:20px;font-size:12px">ID: <span id="idDisplay">-</span> | 🪙 <span id="c2">0</span></div></div>
+<button onclick="doLogout()" style="padding:6px 10px;background:#23262f;color:#fff;font-size:10px;border:0;border-radius:10px">Logout</button>
+</div>
+
+<div class="nav">
+<button id="home" class="active" onclick="showHome()">Ads</button>
+<button id="walletBtn" onclick="showWallet()">Wallet</button>
+<button id="withdrawBtn" onclick="showWithdraw()">Withdraw</button>
+</div>
+
+<div id="homeV"><div id="adList" class="list"></div></div>
+<div id="walletV" style="display:none"><div class="wallet"><h2 id="c">*0 Coins</h2><div style="font-size:22px;margin-top:8px">ID: <span id="id">-</span></div><div style="font-size:12px;color:#888;margin-top:8px">500 Coins = 50 Rupees</div></div></div>
+<div id="withdrawV" style="display:none;padding:16px"><div style="background:#1a1d24;padding:16px;border-radius:16px;border:1px solid #23262f">
+<h3>Withdraw - ID: <span id="id2">-</span></h3>
+<input id="upi" class="input" placeholder="UPI ID" style="margin-top:12px">
+<input id="amt" class="input" placeholder="Coins - Min 500" type="number">
+<button class="btn" onclick="doWithdraw()">Withdraw to WhatsApp</button>
+<div style="margin-top:12px;font-size:11px;color:#666">Wallet: <span id="c3">0</span> Coins = ₹<span id="r">0</span> | Phone: <span id="phoneD">-</span></div>
+</div></div>
+
+</div>
+
+<script>
+var WA="917680914460";
+var phone=null;var coins=0;
+var adCount=50;
+
+function doLogin(){
+var v=document.getElementById('phone').value.trim().replace(/\D/g,'').slice(-10);
+if(v.length<10){alert('10 digit');return;}
+phone=v;
+localStorage.setItem('ph',phone);
+document.getElementById('login').style.display='none';
+document.getElementById('app').style.display='block';
+coins=parseInt(localStorage.getItem('coins_'+phone)||'0');
+updateCoins();renderAds();
+}
+
+function doLogout(){if(confirm('Logout?')){localStorage.removeItem('ph');document.getElementById('login').style.display='flex';document.getElementById('app').style.display='none';}}
+
+function updateCoins(){
+document.getElementById('c2').textContent=coins;
+document.getElementById('c').textContent=coins+' Coins';
+document.getElementById('id').textContent=phone;
+document.getElementById('id2').textContent=phone;
+document.getElementById('idDisplay').textContent=phone;
+document.getElementById('c3').textContent=coins;
+document.getElementById('r').textContent=Math.floor(coins/10);
+document.getElementById('phoneD').textContent=phone;
+document.getElementById('idDisplay').textContent=phone;
+localStorage.setItem('coins_'+phone,coins.toString());
+}
+
+function renderAds(){
+var c=document.getElementById('adList');c.innerHTML='';
+for(var i=0;i<adCount;i++){
+var d=document.createElement('div');d.className='ad-item';
+d.innerHTML='<div class="ad-icon">📺</div><div style="flex:1"><b>Watch Ad '+(i+1)+'</b><br><span style="font-size:11px;color:#888">Watch & Earn • Inside Only • No External</span><br><span style="font-size:11px;color:#10b981">🪙 30 Coins = ₹3</span></div><button style="background:#f59e0b;color:#000;border:0;padding:8px 16px;border-radius:20px;font-weight:700">WATCH</button>';
+(function(idx,el){el.onclick=function(){
+// Inside ads only - 30 Coins direct wallet - Count works - No external redirect
+coins+=30;
+updateCoins();
+// Auto scroll next - Shorts style
+var next = document.getElementById('ad-'+(idx+1));
+if(next) next.scrollIntoView({behavior:'smooth'});
+if(idx>=adCount-2){adCount+=10;renderAds();}
+}})(i,d);
+d.id='ad-'+i;
+c.appendChild(d);
+}
+}
+
+function showHome(){document.getElementById('homeV').style.display='block';document.getElementById('walletV').style.display='none';document.getElementById('withdrawV').style.display='none';document.getElementById('home').className='active';document.getElementById('walletBtn').className='';document.getElementById('withdrawBtn').className='';}
+function showWallet(){document.getElementById('homeV').style.display='none';document.getElementById('walletV').style.display='block';document.getElementById('withdrawV').style.display='none';document.getElementById('home').className='';document.getElementById('walletBtn').className='active';document.getElementById('withdrawBtn').className='';}
+function showWithdraw(){document.getElementById('homeV').style.display='none';document.getElementById('walletV').style.display='none';document.getElementById('withdrawV').style.display='block';document.getElementById('home').className='';document.getElementById('walletBtn').className='';document.getElementById('withdrawBtn').className='active';}
+function doWithdraw(){
+var upi=document.getElementById('upi').value.trim();
+var amt=parseInt(document.getElementById('amt').value.trim());
+if(!upi){alert('UPI & Coins');return;}
+if(amt<500){alert('Min 500 Coins = 50 Rupees');return;}
+if(amt>coins){alert('Not enough Coins - You have '+coins);return;}
+var rs=Math.floor(amt/10);
+var total=coins;
+var remain=total-amt;
+var msg="*NEW WITHDRAWAL* 💰\n📱 Phone: "+phone+"\n🆔 User ID: "+phone+"\n💳 UPI: "+upi+"\n🪙 WITHDRAW: "+amt+" Coins\n👛 WALLET TOTAL: "+total+" Coins = ₹"+Math.floor(total/10)+"\n📉 REMAINING: "+remain+" Coins\n🌐 Website: coins-app-seven.vercel.app\n⏰ Time: "+new Date().toLocaleString()+"\n✅ Send ₹"+rs+" to "+upi;
+window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");
+}
+
+window.onload=function(){
+var saved=localStorage.getItem('ph');
+if(saved){phone=saved;document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';coins=parseInt(localStorage.getItem('coins_'+phone)||'0');updateCoins();renderAds();}
+}
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
