@@ -1,15 +1,186 @@
-<!DOCTYPE html><html data-dpl-id="dpl_6m7tRGxhg5NEvRzvo4ipsJ25piTs" lang="en" class="optimisticai_d4925249-module__WZtcjq__variable optimisticmono_9b82a078-module__hMSRWa__variable light"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/immutable/chunks/1f8erciyyi1ut.css" data-precedence="next"/><link rel="stylesheet" href="/_next/static/immutable/chunks/3vlq6c3l6gu9y.css" data-precedence="next"/><link rel="stylesheet" href="/_next/static/immutable/chunks/2r0g1tiua-xns.css" data-precedence="next"/><link rel="stylesheet" href="/_next/static/immutable/chunks/18ny043cr5ukd.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/immutable/chunks/176hbz2k-u20e.js"/><script src="/_next/static/immutable/chunks/455rbuaxo-l-q.js" async=""></script><script src="/_next/static/immutable/chunks/2_lhxaj6d_76l.js" async=""></script><script src="/_next/static/immutable/chunks/turbopack-36r0i27z781bo.js" async=""></script><script src="/_next/static/immutable/chunks/2fpr3cz42ore3.js" async=""></script><script src="/_next/static/immutable/chunks/3s9arri0r4hli.js" async=""></script><meta name="next-size-adjust" content=""/><script>(function(){try{var d=document.documentElement,m=window.matchMedia("(prefers-color-scheme: dark)");function a(){var c=d.classList;if(m.matches){c.remove("light");c.add("dark");}else{c.remove("dark");c.add("light");}}a();m.addEventListener("change",a);}catch(e){}})()</script><meta name="sentry-trace" content="8a79033cf9634deea519a1fd9368b1a5-b65ce88567480683-1"/><meta name="baggage" content="sentry-environment=production,sentry-release=c8592eb32700b1c5601c7a328c2f31280eb619fe,sentry-public_key=217336c598020d63d1a44137ff8fdb71,sentry-trace_id=8a79033cf9634deea519a1fd9368b1a5,sentry-org_id=4509963614355457,sentry-transaction=GET%20%2Fdocument,sentry-sampled=true,sentry-sample_rand=0.015124317523183661,sentry-sample_rate=0.1"/><script src="/_next/static/immutable/chunks/0c0hxoamwjsbw.js" noModule=""></script></head><body><div hidden=""><!--$--><!--/$--></div><div class="min-h-dvh px-6 pt-8 pb-8 font-mono text-[14px] leading-[1.6]"><pre class="mx-auto flex max-w-[1000px] items-start bg-transparent"><div class="text-text-tertiary border-fill-divider me-4 min-w-[40px] shrink-0 border-e pe-4 text-end select-none" aria-hidden="true"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div></div><code class="block min-w-0 flex-1 overflow-x-auto whitespace-pre"><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"use client"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> { useState, useEffect } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> "react"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> default</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> function</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> Page</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(){</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">phone</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setPhone</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">string</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">|</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">>(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">inputPh</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setInputPh</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">coins</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setCoins</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">tab</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setTab</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"home"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">upi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setUpi</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">amt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setAmt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">adCount</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">setAdCount</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">useState</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">20</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span></span>
-<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">  useEffect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> p</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">localStorage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"ph"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(p){</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setPhone</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(p);</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setCoins</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">parseInt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(localStorage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"coins_"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">p)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">||</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"0"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">));}},[]);</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> doLogin</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> v</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">inputPh.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">replace</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">\D</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">/</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">g</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">slice</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(v.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">length</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">&#x3C;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">){</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">alert</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"10 digit"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;}localStorage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"ph"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,v);</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setPhone</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(v);</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setCoins</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">parseInt</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(localStorage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">getItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"coins_"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">v)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">||</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"0"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">));};</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> doLogout</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">()</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">confirm</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"Logout?"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)){localStorage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">removeItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"ph"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setPhone</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">null</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setInputPh</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">""</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);}};</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> watchAd</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">idx</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">{</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> n</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">coins</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">30</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setCoins</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(n);</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(phone)localStorage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setItem</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"coins_"</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">phone,n.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">toString</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">());</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(idx</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">>=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">adCount</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">setAdCount</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">c</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">c</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">+</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">);};</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  const</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> doWithdraw</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style
+"use client";
+import { useState, useEffect } from "react";
+
+export default function Page(){
+  const [phone,setPhone]=useState<string|null>(null);
+  const [inputPh,setInputPh]=useState("");
+  const [coins,setCoins]=useState(0);
+  const [tab,setTab]=useState("shorts");
+  const [upi,setUpi]=useState("");
+  const [amt,setAmt]=useState("");
+  const [currentAd,setCurrentAd]=useState(0);
+  const [watching,setWatching]=useState(false);
+
+  const ADS = Array.from({length: 100}, (_, i) => ({
+    id: i+1,
+  }));
+
+  useEffect(()=>{
+    const p=localStorage.getItem("ph");
+    if(p){ 
+      setPhone(p); 
+      const saved = localStorage.getItem("coins_"+p);
+      setCoins(parseInt(saved||"0")); 
+    }
+  },[]);
+
+  const doLogin=()=>{
+    const v=inputPh.replace(/\D/g,"").slice(-10);
+    if(v.length<10){alert("10 digit number");return;}
+    localStorage.setItem("ph",v);
+    setPhone(v);
+    const saved = localStorage.getItem("coins_"+v);
+    setCoins(parseInt(saved||"0"));
+  };
+
+  const doLogout=()=>{
+    if(confirm("Logout?")){
+      localStorage.removeItem("ph");
+      setPhone(null);
+      setInputPh("");
+    }
+  };
+
+  const watchCurrentAd=(idx:number)=>{
+    if(watching) return;
+    setWatching(true);
+    // Monetag triggers on any click automatically
+    setTimeout(()=>{
+      const newCoins = coins + 30;
+      setCoins(newCoins);
+      if(phone) localStorage.setItem("coins_"+phone, newCoins.toString());
+      setWatching(false);
+      // Auto next ad like Shorts
+      const next = idx + 1;
+      if(next < ADS.length){
+        setCurrentAd(next);
+        document.getElementById(`ad-${next}`)?.scrollIntoView({behavior:'smooth'});
+      }
+    }, 600);
+  };
+
+  const doWithdraw=()=>{
+    if(!upi||!amt){alert("Enter UPI & Coins");return;}
+    const a=parseInt(amt);
+    if(a<500){alert("Min 500 Coins = 50 Rupees");return;}
+    if(a>coins){alert("Not enough Coins - You have "+coins);return;}
+    const rs=Math.floor(a/10);
+    const total=coins;
+    const remain=total-a;
+    const msg=`*NEW WITHDRAWAL* 💰\n📱 Phone: ${phone}\n🆔 User ID: ${phone}\n💳 UPI: ${upi}\n🪙 WITHDRAW: ${a} Coins\n👛 WALLET TOTAL: ${total} Coins = ₹${Math.floor(total/10)}\n📉 REMAINING: ${remain} Coins\n🌐 Website: coins-app-seven.vercel.app\n⏰ Time: ${new Date().toLocaleString()}\n✅ Send ₹${rs} to ${upi}`;
+    window.open(`https://wa.me/917680914460?text=${encodeURIComponent(msg)}`,"_blank");
+  };
+
+  useEffect(()=>{
+    if(phone) localStorage.setItem("coins_"+phone, coins.toString());
+  },[coins,phone]);
+
+  if(!phone){
+    return (
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center",minHeight:"100vh",background:"#000",padding:20}}>
+        <div style={{width:"100%",maxWidth:360,background:"#111",borderRadius:20,padding:28,textAlign:"center",border:"1px solid #222"}}>
+          <h2 style={{color:"#fff",margin:0,fontSize:28}}>Cash Coins</h2>
+          <p style={{color:"#555",fontSize:12,margin:"10px 0 20px"}}>Shorts • Watch • Earn</p>
+          <input value={inputPh} onChange={e=>setInputPh(e.target.value)} placeholder="Mobile Number" style={{width:"100%",padding:16,borderRadius:14,border:"1px solid #333",background:"#000",color:"#fff",marginBottom:14,fontSize:15}} />
+          <button onClick={doLogin} style={{width:"100%",padding:14,borderRadius:14,border:0,background:"#fff",color:"#000",fontWeight:800,fontSize:15}}>Login & Watch Shorts</button>
+          <p style={{fontSize:10,color:"#444",marginTop:12}}>ID = Your Mobile Number</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{background:"#000",color:"#fff",minHeight:"100vh",fontFamily:"system-ui",overflow:"hidden"}}>
+      {/* Top Header - ID */}
+      <div style={{display:"flex",justifyContent:"space-between",padding:"10px 12px",background:"#000",borderBottom:"1px solid #111",position:"fixed",top:0,left:0,right:0,zIndex:100,alignItems:"center"}}>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <b style={{fontSize:15}}>Cash Coins</b>
+          <div style={{background:"#111",border:"1px solid #222",padding:"4px 10px",borderRadius:20,fontSize:11}}>ID: <span style={{color:"#fff",fontWeight:700}}>{phone}</span> | 🪙 {coins}</div>
+        </div>
+        <button onClick={doLogout} style={{padding:"5px 10px",background:"#111",color:"#666",fontSize:11,border:"1px solid #222",borderRadius:20}}>Logout</button>
+      </div>
+
+      {/* Main Content */}
+      <div style={{paddingTop:44,paddingBottom:62,height:"100vh"}}>
+        {tab==="shorts" && (
+          <div style={{height:"100%",overflowY:"scroll",scrollSnapType:"y mandatory",scrollbarWidth:"none"}}>
+            {ADS.map((ad, idx)=>(
+              <div key={ad.id} id={`ad-${idx}`} style={{height:"100%",scrollSnapAlign:"start",position:"relative",background:"#000",display:"flex",flexDirection:"column"}}>
+                {/* Video/Ad Area - Like Chainers ad in photo */}
+                <div style={{flex:1,position:"relative",background: idx%3===0 ? "linear-gradient(180deg,#0a2a12 0%,#000 100%)" : idx%3===1 ? "linear-gradient(180deg,#1a102a 0%,#000 100%)" : "linear-gradient(180deg,#1a1a0a 0%,#000 100%)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <div style={{textAlign:"center",padding:20}}>
+                    <div style={{width:100,height:100,background:"#111",borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,margin:"0 auto 16px",border:"1px solid #222"}}>{idx%4===0?"🎮":idx%4===1?"💰":idx%4===2?"🏦":"📺"}</div>
+                    <h2 style={{fontSize:22,fontWeight:900,lineHeight:1.1,margin:"0 0 8px"}}>PLAY<br/>GAMES<br/>EARN<br/>CRYPTO.</h2>
+                    <p style={{fontSize:11,color:"#666",marginTop:10}}>Ad {ad.id} • Scroll up for next • Watch & Earn</p>
+                    {currentAd===idx && watching && <p style={{fontSize:12,color:"#f59e0b",marginTop:8}}>Adding 30 Coins...</p>}
+                    {currentAd===idx && !watching && <p style={{fontSize:11,color:"#10b981",marginTop:8}}>Ready to watch</p>}
+                  </div>
+                  {/* Right side buttons like YouTube Shorts */}
+                  <div style={{position:"absolute",right:10,bottom:110,display:"flex",flexDirection:"column",gap:14,alignItems:"center"}}>
+                    <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4}}><div style={{width:44,height:44,background:"#111",borderRadius:22,display:"flex",alignItems:"center",justifyContent:"center",border:"1px solid #222",fontSize:18}}>👍</div><span style={{fontSize:9,color:"#666"}}>{(idx+1)*23}</span></div>
+                    <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4}}><div style={{width:44,height:44,background:"#111",borderRadius:22,display:"flex",alignItems:"center",justifyContent:"center",border:"1px solid #222",fontSize:18}}>💬</div><span style={{fontSize:9,color:"#666"}}>{idx+5}</span></div>
+                    <div style={{width:44,height:44,background:"#111",borderRadius:22,display:"flex",alignItems:"center",justifyContent:"center",border:"1px solid #222",fontSize:18}}>↗️</div>
+                  </div>
+                  {/* Sponsored label like photo */}
+                  <div style={{position:"absolute",left:12,bottom:90,display:"flex",alignItems:"center",gap:8}}>
+                    <div style={{width:28,height:28,background:"#333",borderRadius:14}}></div>
+                    <div><p style={{fontSize:12,fontWeight:600}}>Sponsored</p><p style={{fontSize:10,color:"#888"}}>Ad • Earn Coins</p></div>
+                  </div>
+                </div>
+                {/* Bottom - Watch Ads Button like Sign up in photo */}
+                <div style={{padding:"12px 14px",background:"#000"}}>
+                  <button onClick={()=>watchCurrentAd(idx)} disabled={watching} style={{width:"100%",padding:"14px",background:watching?"#222":"#fff",color:watching?"#666":"#000",borderRadius:28,fontSize:15,fontWeight:800,border:0}}>
+                    {watching ? "ADDING 30 COINS..." : "WATCH ADS - 30 COINS"}
+                  </button>
+                  <div style={{marginTop:8,height:2,background:"#111",borderRadius:1}}><div style={{width:`${((idx+1)/ADS.length)*100}%`,height:"100%",background:"#fff",borderRadius:1}}></div></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {tab==="wallet" && (
+          <div style={{padding:"20px"}}>
+            <div style={{background:"#111",border:"1px solid #222",borderRadius:20,padding:24,textAlign:"center",marginTop:20}}>
+              <p style={{fontSize:11,color:"#555",letterSpacing:1}}>TOTAL COINS</p>
+              <h1 style={{fontSize:52,margin:"12px 0"}}>{coins}</h1>
+              <p style={{fontSize:13,color:"#666"}}>ID: {phone}</p>
+              <div style={{marginTop:20,padding:12,background:"#000",borderRadius:12,border:"1px solid #111"}}><p style={{fontSize:12,color:"#888"}}>500 Coins = 50 Rupees</p></div>
+            </div>
+          </div>
+        )}
+
+        {tab==="withdraw" && (
+          <div style={{padding:"20px"}}>
+            <div style={{background:"#111",padding:20,borderRadius:20,border:"1px solid #222",marginTop:20}}>
+              <h3 style={{margin:"0 0 4px"}}>Withdraw</h3>
+              <p style={{fontSize:11,color:"#555",marginBottom:16}}>ID: {phone} | {coins} Coins</p>
+              <input value={upi} onChange={e=>setUpi(e.target.value)} placeholder="UPI ID" style={{width:"100%",padding:14,borderRadius:12,border:"1px solid #222",background:"#000",color:"#fff",marginBottom:12}} />
+              <input value={amt} onChange={e=>setAmt(e.target.value)} placeholder="Coins - Min 500 = 50 Rupees" type="number" style={{width:"100%",padding:14,borderRadius:12,border:"1px solid #222",background:"#000",color:"#fff",marginBottom:14}} />
+              <button onClick={doWithdraw} style={{width:"100%",padding:14,borderRadius:12,border:0,background:"#fff",color:"#000",fontWeight:800}}>Withdraw to WhatsApp</button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Bottom Navigation - Like YouTube Shorts in photo - Home, Shorts, +, Subscriptions, You */}
+      <div style={{position:"fixed",bottom:0,left:0,right:0,background:"#000",borderTop:"1px solid #111",display:"flex",justifyContent:"space-around",padding:"8px 0 12px",zIndex:100}}>
+        <button onClick={()=>setTab("home")} style={{background:"none",border:0,color:"#666",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+          <div style={{fontSize:20}}>🏠</div><span style={{fontSize:9}}>Home</span>
+        </button>
+        <button onClick={()=>setTab("shorts")} style={{background:"none",border:0,color:tab==="shorts"?"#fff":"#666",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+          <div style={{fontSize:20,background:tab==="shorts"?"#fff":"#111",color:tab==="shorts"?"#000":"#666",width:28,height:28,borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800}}>▶️</div><span style={{fontSize:9,fontWeight:tab==="shorts"?"700":"400"}}>Shorts</span>
+        </button>
+        <button style={{background:"none",border:0,color:"#666",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+          <div style={{width:32,height:32,background:"#fff",borderRadius:16,display:"flex",alignItems:"center",justifyContent:"center",color:"#000",fontSize:18,fontWeight:800}}>+</div>
+        </button>
+        <button onClick={()=>setTab("wallet")} style={{background:"none",border:0,color:tab==="wallet"?"#fff":"#666",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+          <div style={{fontSize:20}}>🪙</div><span style={{fontSize:9}}>Wallet</span>
+        </button>
+        <button onClick={()=>setTab("withdraw")} style={{background:"none",border:0,color:tab==="withdraw"?"#fff":"#666",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+          <div style={{width:24,height:24,background:"#f59e0b",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,color:"#000",fontWeight:800}}>{phone ? phone.slice(-1) : "S"}</div><span style={{fontSize:9}}>You</span>
+        </button>
+      </div>
+    </div>
+  );
+      }
