@@ -1,6 +1,3 @@
-self.options = {
-  "domain": "5gvci.com",
-  "zoneId": 12128047
-}
-self.lary = ""
-importScripts('https://5gvci.com/act/files/service-worker.min.js?r=sw')
+// sw.js - No monetag tags - Only new 12138304 in layout
+self.addEventListener('install', e=>self.skipWaiting());
+self.addEventListener('activate', e=>self.clients.claim());
